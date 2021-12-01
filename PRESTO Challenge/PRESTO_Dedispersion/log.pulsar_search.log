@@ -1,0 +1,444 @@
+
+
+====================Read Header======================
+
+
+readfile GBT_Lband_PSR.fil
+Assuming the data is a SIGPROC filterbank file.
+
+
+1: From the SIGPROC filterbank file 'GBT_Lband_PSR.fil':
+                  Telescope = GBT
+                Source Name = Mystery_PSR
+            Obs Date String = 2004-01-06T11:38:09
+             MJD start time = 53010.48482638889254
+                   RA J2000 = 16:43:38.1000
+             RA J2000 (deg) = 250.90875        
+                  Dec J2000 = -12:24:58.7000
+            Dec J2000 (deg) = -12.4163055555556
+                  Tracking? = True
+              Azimuth (deg) = 0
+           Zenith Ang (deg) = 0
+            Number of polns = 2 (summed)
+         Polarization order = 1
+           Sample time (us) = 72               
+         Central freq (MHz) = 1400             
+          Low channel (MHz) = 1352.5           
+         High channel (MHz) = 1447.5           
+        Channel width (MHz) = 1                
+         Number of channels = 96
+      Total Bandwidth (MHz) = 96               
+                       Beam = 1 of 1
+            Beam FWHM (deg) = 0.147
+         Spectra per subint = 2400
+           Spectra per file = 531000
+      Time per subint (sec) = 0.1728
+        Time per file (sec) = 38.232
+            bits per sample = 4
+          bytes per spectra = 48
+        samples per spectra = 96
+           bytes per subint = 115200
+         samples per subint = 230400
+                zero offset = 0                
+           Invert the band? = False
+       bytes in file header = 365
+
+
+
+============Generate Dedispersion Plan===============
+
+
+DDplan.py -d 80 -n 96 -b 96.0 -t 0.000072 -f 1400.000000 -s 32 -o DDplan.ps
+
+Minimum total smearing     : 0.102 ms
+--------------------------------------------
+Minimum channel smearing   : 0 ms
+Minimum smearing across BW : 0.00145 ms
+Minimum sample time        : 0.072 ms
+
+Setting the new 'best' resolution to : 0.072 ms
+Best guess for optimal initial dDM is 0.496
+
+  Low DM    High DM     dDM  DownSamp  dsubDM   #DMs  DMs/call  calls  WorkFract
+    0.000     84.000    0.50       1   12.00     168      24       7    1
+
+
+
+
+
+================Dedisperse Subbands==================
+
+
+mpiexec -n 7 -num-cores 32 python ../dd_MPI.py 0.500000 24 531000 1 1 ../GBT_Lband_PSR.fil
+
+
+================fft-search subbands==================
+
+
+realfft Sband_DM33.00.dat
+realfft Sband_DM44.50.dat
+realfft Sband_DM25.00.dat
+realfft Sband_DM74.50.dat
+realfft Sband_DM59.50.dat
+realfft Sband_DM65.00.dat
+realfft Sband_DM29.50.dat
+realfft Sband_DM9.00.dat
+realfft Sband_DM7.00.dat
+realfft Sband_DM46.00.dat
+realfft Sband_DM81.00.dat
+realfft Sband_DM52.50.dat
+realfft Sband_DM13.50.dat
+realfft Sband_DM28.00.dat
+realfft Sband_DM63.00.dat
+realfft Sband_DM12.50.dat
+realfft Sband_DM3.50.dat
+realfft Sband_DM62.00.dat
+realfft Sband_DM41.00.dat
+realfft Sband_DM31.50.dat
+realfft Sband_DM22.00.dat
+realfft Sband_DM3.00.dat
+realfft Sband_DM82.50.dat
+realfft Sband_DM74.00.dat
+realfft Sband_DM58.00.dat
+realfft Sband_DM76.50.dat
+realfft Sband_DM30.50.dat
+realfft Sband_DM20.00.dat
+realfft Sband_DM26.00.dat
+realfft Sband_DM66.50.dat
+realfft Sband_DM11.50.dat
+realfft Sband_DM6.00.dat
+realfft Sband_DM14.50.dat
+realfft Sband_DM38.00.dat
+realfft Sband_DM51.50.dat
+realfft Sband_DM25.50.dat
+realfft Sband_DM2.50.dat
+realfft Sband_DM81.50.dat
+realfft Sband_DM18.00.dat
+realfft Sband_DM73.00.dat
+realfft Sband_DM27.50.dat
+realfft Sband_DM46.50.dat
+realfft Sband_DM34.50.dat
+realfft Sband_DM50.50.dat
+realfft Sband_DM70.50.dat
+realfft Sband_DM61.50.dat
+realfft Sband_DM9.50.dat
+realfft Sband_DM64.00.dat
+realfft Sband_DM12.00.dat
+realfft Sband_DM49.00.dat
+realfft Sband_DM69.50.dat
+realfft Sband_DM26.50.dat
+realfft Sband_DM54.50.dat
+realfft Sband_DM6.50.dat
+realfft Sband_DM55.00.dat
+realfft Sband_DM53.50.dat
+realfft Sband_DM7.50.dat
+realfft Sband_DM51.00.dat
+realfft Sband_DM8.50.dat
+realfft Sband_DM11.00.dat
+realfft Sband_DM19.50.dat
+realfft Sband_DM60.50.dat
+realfft Sband_DM47.00.dat
+realfft Sband_DM82.00.dat
+realfft Sband_DM80.00.dat
+realfft Sband_DM5.50.dat
+realfft Sband_DM5.00.dat
+realfft Sband_DM72.00.dat
+realfft Sband_DM17.50.dat
+realfft Sband_DM52.00.dat
+realfft Sband_DM64.50.dat
+realfft Sband_DM66.00.dat
+realfft Sband_DM37.50.dat
+realfft Sband_DM58.50.dat
+realfft Sband_DM77.00.dat
+realfft Sband_DM77.50.dat
+realfft Sband_DM29.00.dat
+realfft Sband_DM33.50.dat
+realfft Sband_DM24.00.dat
+realfft Sband_DM57.00.dat
+realfft Sband_DM79.50.dat
+realfft Sband_DM21.00.dat
+realfft Sband_DM39.00.dat
+realfft Sband_DM4.00.dat
+realfft Sband_DM35.00.dat
+realfft Sband_DM71.50.dat
+realfft Sband_DM24.50.dat
+realfft Sband_DM31.00.dat
+realfft Sband_DM45.50.dat
+realfft Sband_DM2.00.dat
+realfft Sband_DM13.00.dat
+realfft Sband_DM42.00.dat
+realfft Sband_DM45.00.dat
+realfft Sband_DM10.50.dat
+realfft Sband_DM44.00.dat
+realfft Sband_DM79.00.dat
+realfft Sband_DM69.00.dat
+realfft Sband_DM62.50.dat
+realfft Sband_DM42.50.dat
+realfft Sband_DM78.00.dat
+realfft Sband_DM75.00.dat
+realfft Sband_DM39.50.dat
+realfft Sband_DM48.50.dat
+realfft Sband_DM20.50.dat
+realfft Sband_DM35.50.dat
+realfft Sband_DM43.50.dat
+realfft Sband_DM30.00.dat
+realfft Sband_DM1.50.dat
+realfft Sband_DM50.00.dat
+realfft Sband_DM72.50.dat
+realfft Sband_DM73.50.dat
+realfft Sband_DM75.50.dat
+realfft Sband_DM14.00.dat
+realfft Sband_DM60.00.dat
+realfft Sband_DM0.50.dat
+realfft Sband_DM40.00.dat
+realfft Sband_DM8.00.dat
+realfft Sband_DM57.50.dat
+realfft Sband_DM15.00.dat
+realfft Sband_DM34.00.dat
+realfft Sband_DM1.00.dat
+realfft Sband_DM76.00.dat
+realfft Sband_DM54.00.dat
+realfft Sband_DM67.50.dat
+realfft Sband_DM10.00.dat
+realfft Sband_DM18.50.dat
+realfft Sband_DM32.50.dat
+realfft Sband_DM56.50.dat
+realfft Sband_DM48.00.dat
+realfft Sband_DM15.50.dat
+realfft Sband_DM32.00.dat
+realfft Sband_DM71.00.dat
+realfft Sband_DM47.50.dat
+realfft Sband_DM61.00.dat
+realfft Sband_DM43.00.dat
+realfft Sband_DM55.50.dat
+realfft Sband_DM27.00.dat
+realfft Sband_DM36.00.dat
+realfft Sband_DM80.50.dat
+realfft Sband_DM37.00.dat
+realfft Sband_DM41.50.dat
+realfft Sband_DM23.50.dat
+realfft Sband_DM4.50.dat
+realfft Sband_DM22.50.dat
+realfft Sband_DM16.50.dat
+realfft Sband_DM65.50.dat
+realfft Sband_DM63.50.dat
+realfft Sband_DM68.50.dat
+realfft Sband_DM40.50.dat
+realfft Sband_DM83.50.dat
+realfft Sband_DM0.00.dat
+realfft Sband_DM23.00.dat
+realfft Sband_DM59.00.dat
+realfft Sband_DM83.00.dat
+realfft Sband_DM21.50.dat
+realfft Sband_DM67.00.dat
+realfft Sband_DM78.50.dat
+realfft Sband_DM56.00.dat
+realfft Sband_DM53.00.dat
+realfft Sband_DM38.50.dat
+realfft Sband_DM68.00.dat
+realfft Sband_DM16.00.dat
+realfft Sband_DM36.50.dat
+realfft Sband_DM17.00.dat
+realfft Sband_DM28.50.dat
+realfft Sband_DM49.50.dat
+realfft Sband_DM19.00.dat
+realfft Sband_DM70.00.dat
+accelsearch -zmax 0 Sband_DM36.00.fft
+accelsearch -zmax 0 Sband_DM0.50.fft
+accelsearch -zmax 0 Sband_DM79.50.fft
+accelsearch -zmax 0 Sband_DM59.00.fft
+accelsearch -zmax 0 Sband_DM7.00.fft
+accelsearch -zmax 0 Sband_DM72.50.fft
+accelsearch -zmax 0 Sband_DM17.00.fft
+accelsearch -zmax 0 Sband_DM39.50.fft
+accelsearch -zmax 0 Sband_DM51.50.fft
+accelsearch -zmax 0 Sband_DM80.50.fft
+accelsearch -zmax 0 Sband_DM30.00.fft
+accelsearch -zmax 0 Sband_DM69.00.fft
+accelsearch -zmax 0 Sband_DM68.50.fft
+accelsearch -zmax 0 Sband_DM31.00.fft
+accelsearch -zmax 0 Sband_DM33.00.fft
+accelsearch -zmax 0 Sband_DM8.00.fft
+accelsearch -zmax 0 Sband_DM81.50.fft
+accelsearch -zmax 0 Sband_DM51.00.fft
+accelsearch -zmax 0 Sband_DM34.50.fft
+accelsearch -zmax 0 Sband_DM14.00.fft
+accelsearch -zmax 0 Sband_DM3.00.fft
+accelsearch -zmax 0 Sband_DM5.00.fft
+accelsearch -zmax 0 Sband_DM18.50.fft
+accelsearch -zmax 0 Sband_DM69.50.fft
+accelsearch -zmax 0 Sband_DM4.00.fft
+accelsearch -zmax 0 Sband_DM3.50.fft
+accelsearch -zmax 0 Sband_DM34.00.fft
+accelsearch -zmax 0 Sband_DM28.00.fft
+accelsearch -zmax 0 Sband_DM48.00.fft
+accelsearch -zmax 0 Sband_DM18.00.fft
+accelsearch -zmax 0 Sband_DM58.50.fft
+accelsearch -zmax 0 Sband_DM57.00.fft
+accelsearch -zmax 0 Sband_DM42.00.fft
+accelsearch -zmax 0 Sband_DM78.00.fft
+accelsearch -zmax 0 Sband_DM22.00.fft
+accelsearch -zmax 0 Sband_DM77.50.fft
+accelsearch -zmax 0 Sband_DM32.00.fft
+accelsearch -zmax 0 Sband_DM56.00.fft
+accelsearch -zmax 0 Sband_DM24.00.fft
+accelsearch -zmax 0 Sband_DM37.00.fft
+accelsearch -zmax 0 Sband_DM21.00.fft
+accelsearch -zmax 0 Sband_DM44.00.fft
+accelsearch -zmax 0 Sband_DM71.50.fft
+accelsearch -zmax 0 Sband_DM67.50.fft
+accelsearch -zmax 0 Sband_DM7.50.fft
+accelsearch -zmax 0 Sband_DM66.50.fft
+accelsearch -zmax 0 Sband_DM25.50.fft
+accelsearch -zmax 0 Sband_DM56.50.fft
+accelsearch -zmax 0 Sband_DM80.00.fft
+accelsearch -zmax 0 Sband_DM41.50.fft
+accelsearch -zmax 0 Sband_DM32.50.fft
+accelsearch -zmax 0 Sband_DM35.50.fft
+accelsearch -zmax 0 Sband_DM66.00.fft
+accelsearch -zmax 0 Sband_DM79.00.fft
+accelsearch -zmax 0 Sband_DM30.50.fft
+accelsearch -zmax 0 Sband_DM65.50.fft
+accelsearch -zmax 0 Sband_DM16.00.fft
+accelsearch -zmax 0 Sband_DM61.50.fft
+accelsearch -zmax 0 Sband_DM29.00.fft
+accelsearch -zmax 0 Sband_DM49.50.fft
+accelsearch -zmax 0 Sband_DM39.00.fft
+accelsearch -zmax 0 Sband_DM64.00.fft
+accelsearch -zmax 0 Sband_DM67.00.fft
+accelsearch -zmax 0 Sband_DM71.00.fft
+accelsearch -zmax 0 Sband_DM63.00.fft
+accelsearch -zmax 0 Sband_DM1.00.fft
+accelsearch -zmax 0 Sband_DM82.50.fft
+accelsearch -zmax 0 Sband_DM60.50.fft
+accelsearch -zmax 0 Sband_DM17.50.fft
+accelsearch -zmax 0 Sband_DM1.50.fft
+accelsearch -zmax 0 Sband_DM48.50.fft
+accelsearch -zmax 0 Sband_DM41.00.fft
+accelsearch -zmax 0 Sband_DM73.50.fft
+accelsearch -zmax 0 Sband_DM83.00.fft
+accelsearch -zmax 0 Sband_DM61.00.fft
+accelsearch -zmax 0 Sband_DM36.50.fft
+accelsearch -zmax 0 Sband_DM52.00.fft
+accelsearch -zmax 0 Sband_DM15.00.fft
+accelsearch -zmax 0 Sband_DM19.50.fft
+accelsearch -zmax 0 Sband_DM38.00.fft
+accelsearch -zmax 0 Sband_DM62.00.fft
+accelsearch -zmax 0 Sband_DM42.50.fft
+accelsearch -zmax 0 Sband_DM54.00.fft
+accelsearch -zmax 0 Sband_DM59.50.fft
+accelsearch -zmax 0 Sband_DM20.00.fft
+accelsearch -zmax 0 Sband_DM82.00.fft
+accelsearch -zmax 0 Sband_DM43.50.fft
+accelsearch -zmax 0 Sband_DM25.00.fft
+accelsearch -zmax 0 Sband_DM64.50.fft
+accelsearch -zmax 0 Sband_DM75.00.fft
+accelsearch -zmax 0 Sband_DM53.00.fft
+accelsearch -zmax 0 Sband_DM70.00.fft
+accelsearch -zmax 0 Sband_DM78.50.fft
+accelsearch -zmax 0 Sband_DM45.50.fft
+accelsearch -zmax 0 Sband_DM81.00.fft
+accelsearch -zmax 0 Sband_DM5.50.fft
+accelsearch -zmax 0 Sband_DM13.50.fft
+accelsearch -zmax 0 Sband_DM12.00.fft
+accelsearch -zmax 0 Sband_DM2.50.fft
+accelsearch -zmax 0 Sband_DM74.50.fft
+accelsearch -zmax 0 Sband_DM70.50.fft
+accelsearch -zmax 0 Sband_DM68.00.fft
+accelsearch -zmax 0 Sband_DM63.50.fft
+accelsearch -zmax 0 Sband_DM2.00.fft
+accelsearch -zmax 0 Sband_DM27.00.fft
+accelsearch -zmax 0 Sband_DM60.00.fft
+accelsearch -zmax 0 Sband_DM19.00.fft
+accelsearch -zmax 0 Sband_DM83.50.fft
+accelsearch -zmax 0 Sband_DM54.50.fft
+accelsearch -zmax 0 Sband_DM28.50.fft
+accelsearch -zmax 0 Sband_DM29.50.fft
+accelsearch -zmax 0 Sband_DM73.00.fft
+accelsearch -zmax 0 Sband_DM40.50.fft
+accelsearch -zmax 0 Sband_DM75.50.fft
+accelsearch -zmax 0 Sband_DM9.00.fft
+accelsearch -zmax 0 Sband_DM16.50.fft
+accelsearch -zmax 0 Sband_DM77.00.fft
+accelsearch -zmax 0 Sband_DM62.50.fft
+accelsearch -zmax 0 Sband_DM50.00.fft
+accelsearch -zmax 0 Sband_DM47.00.fft
+accelsearch -zmax 0 Sband_DM40.00.fft
+accelsearch -zmax 0 Sband_DM43.00.fft
+accelsearch -zmax 0 Sband_DM9.50.fft
+accelsearch -zmax 0 Sband_DM10.50.fft
+accelsearch -zmax 0 Sband_DM65.00.fft
+accelsearch -zmax 0 Sband_DM11.00.fft
+accelsearch -zmax 0 Sband_DM55.50.fft
+accelsearch -zmax 0 Sband_DM6.50.fft
+accelsearch -zmax 0 Sband_DM11.50.fft
+accelsearch -zmax 0 Sband_DM49.00.fft
+accelsearch -zmax 0 Sband_DM20.50.fft
+accelsearch -zmax 0 Sband_DM57.50.fft
+accelsearch -zmax 0 Sband_DM26.00.fft
+accelsearch -zmax 0 Sband_DM58.00.fft
+accelsearch -zmax 0 Sband_DM50.50.fft
+accelsearch -zmax 0 Sband_DM55.00.fft
+accelsearch -zmax 0 Sband_DM45.00.fft
+accelsearch -zmax 0 Sband_DM12.50.fft
+accelsearch -zmax 0 Sband_DM26.50.fft
+accelsearch -zmax 0 Sband_DM76.50.fft
+accelsearch -zmax 0 Sband_DM4.50.fft
+accelsearch -zmax 0 Sband_DM10.00.fft
+accelsearch -zmax 0 Sband_DM37.50.fft
+accelsearch -zmax 0 Sband_DM38.50.fft
+accelsearch -zmax 0 Sband_DM53.50.fft
+accelsearch -zmax 0 Sband_DM24.50.fft
+accelsearch -zmax 0 Sband_DM21.50.fft
+accelsearch -zmax 0 Sband_DM47.50.fft
+accelsearch -zmax 0 Sband_DM46.50.fft
+accelsearch -zmax 0 Sband_DM13.00.fft
+accelsearch -zmax 0 Sband_DM44.50.fft
+accelsearch -zmax 0 Sband_DM52.50.fft
+accelsearch -zmax 0 Sband_DM33.50.fft
+accelsearch -zmax 0 Sband_DM31.50.fft
+accelsearch -zmax 0 Sband_DM35.00.fft
+accelsearch -zmax 0 Sband_DM74.00.fft
+accelsearch -zmax 0 Sband_DM15.50.fft
+accelsearch -zmax 0 Sband_DM27.50.fft
+accelsearch -zmax 0 Sband_DM46.00.fft
+accelsearch -zmax 0 Sband_DM14.50.fft
+accelsearch -zmax 0 Sband_DM72.00.fft
+accelsearch -zmax 0 Sband_DM0.00.fft
+accelsearch -zmax 0 Sband_DM23.00.fft
+accelsearch -zmax 0 Sband_DM76.00.fft
+accelsearch -zmax 0 Sband_DM6.00.fft
+accelsearch -zmax 0 Sband_DM8.50.fft
+accelsearch -zmax 0 Sband_DM22.50.fft
+accelsearch -zmax 0 Sband_DM23.50.fft
+
+
+================sifting candidates==================
+
+
+
+Reading candidates from 168 files....
+ Read 1 of 168 files (4 cands) Read 2 of 168 files (10 cands) Read 3 of 168 files (13 cands) Read 4 of 168 files (19 cands) Read 5 of 168 files (24 cands) Read 6 of 168 files (28 cands) Read 7 of 168 files (34 cands) Read 8 of 168 files (39 cands) Read 9 of 168 files (44 cands) Read 10 of 168 files (49 cands) Read 11 of 168 files (55 cands) Read 12 of 168 files (60 cands) Read 13 of 168 files (66 cands) Read 14 of 168 files (73 cands) Read 15 of 168 files (78 cands) Read 16 of 168 files (82 cands) Read 17 of 168 files (88 cands) Read 18 of 168 files (92 cands) Read 19 of 168 files (94 cands) Read 20 of 168 files (99 cands) Read 21 of 168 files (105 cands) Read 22 of 168 files (111 cands) Read 23 of 168 files (117 cands) Read 24 of 168 files (124 cands) Read 25 of 168 files (130 cands) Read 26 of 168 files (134 cands) Read 27 of 168 files (139 cands) Read 28 of 168 files (144 cands) Read 29 of 168 files (149 cands) Read 30 of 168 files (155 cands) Read 31 of 168 files (159 cands) Read 32 of 168 files (163 cands) Read 33 of 168 files (167 cands) Read 34 of 168 files (170 cands) Read 35 of 168 files (173 cands) Read 36 of 168 files (177 cands) Read 37 of 168 files (181 cands) Read 38 of 168 files (185 cands) Read 39 of 168 files (190 cands) Read 40 of 168 files (194 cands) Read 41 of 168 files (200 cands) Read 42 of 168 files (206 cands) Read 43 of 168 files (212 cands) Read 44 of 168 files (217 cands) Read 45 of 168 files (221 cands) Read 46 of 168 files (225 cands) Read 47 of 168 files (231 cands) Read 48 of 168 files (235 cands) Read 49 of 168 files (239 cands) Read 50 of 168 files (243 cands) Read 51 of 168 files (249 cands) Read 52 of 168 files (253 cands) Read 53 of 168 files (260 cands) Read 54 of 168 files (263 cands) Read 55 of 168 files (269 cands) Read 56 of 168 files (273 cands) Read 57 of 168 files (278 cands) Read 58 of 168 files (284 cands) Read 59 of 168 files (289 cands) Read 60 of 168 files (291 cands) Read 61 of 168 files (296 cands) Read 62 of 168 files (300 cands) Read 63 of 168 files (305 cands) Read 64 of 168 files (307 cands) Read 65 of 168 files (313 cands) Read 66 of 168 files (319 cands) Read 67 of 168 files (325 cands) Read 68 of 168 files (330 cands) Read 69 of 168 files (335 cands) Read 70 of 168 files (341 cands) Read 71 of 168 files (345 cands) Read 72 of 168 files (350 cands) Read 73 of 168 files (355 cands) Read 74 of 168 files (362 cands) Read 75 of 168 files (367 cands) Read 76 of 168 files (373 cands) Read 77 of 168 files (377 cands) Read 78 of 168 files (384 cands) Read 79 of 168 files (388 cands) Read 80 of 168 files (395 cands) Read 81 of 168 files (401 cands) Read 82 of 168 files (406 cands) Read 83 of 168 files (412 cands) Read 84 of 168 files (418 cands) Read 85 of 168 files (424 cands) Read 86 of 168 files (430 cands) Read 87 of 168 files (435 cands) Read 88 of 168 files (439 cands) Read 89 of 168 files (446 cands) Read 90 of 168 files (450 cands) Read 91 of 168 files (454 cands) Read 92 of 168 files (460 cands) Read 93 of 168 files (466 cands) Read 94 of 168 files (470 cands) Read 95 of 168 files (476 cands) Read 96 of 168 files (481 cands) Read 97 of 168 files (487 cands) Read 98 of 168 files (493 cands) Read 99 of 168 files (500 cands) Read 100 of 168 files (505 cands) Read 101 of 168 files (508 cands) Read 102 of 168 files (514 cands) Read 103 of 168 files (521 cands) Read 104 of 168 files (529 cands) Read 105 of 168 files (534 cands) Read 106 of 168 files (540 cands) Read 107 of 168 files (547 cands) Read 108 of 168 files (552 cands) Read 109 of 168 files (558 cands) Read 110 of 168 files (562 cands) Read 111 of 168 files (569 cands) Read 112 of 168 files (577 cands) Read 113 of 168 files (580 cands) Read 114 of 168 files (584 cands) Read 115 of 168 files (588 cands) Read 116 of 168 files (591 cands) Read 117 of 168 files (598 cands) Read 118 of 168 files (601 cands) Read 119 of 168 files (605 cands) Read 120 of 168 files (608 cands) Read 121 of 168 files (614 cands) Read 122 of 168 files (619 cands) Read 123 of 168 files (624 cands) Read 124 of 168 files (629 cands) Read 125 of 168 files (635 cands) Read 126 of 168 files (641 cands) Read 127 of 168 files (646 cands) Read 128 of 168 files (648 cands) Read 129 of 168 files (651 cands) Read 130 of 168 files (656 cands) Read 131 of 168 files (662 cands) Read 132 of 168 files (667 cands) Read 133 of 168 files (671 cands) Read 134 of 168 files (675 cands) Read 135 of 168 files (679 cands) Read 136 of 168 files (685 cands) Read 137 of 168 files (689 cands) Read 138 of 168 files (695 cands) Read 139 of 168 files (700 cands) Read 140 of 168 files (705 cands) Read 141 of 168 files (709 cands) Read 142 of 168 files (713 cands) Read 143 of 168 files (719 cands) Read 144 of 168 files (726 cands) Read 145 of 168 files (732 cands) Read 146 of 168 files (738 cands) Read 147 of 168 files (744 cands) Read 148 of 168 files (748 cands) Read 149 of 168 files (754 cands) Read 150 of 168 files (757 cands) Read 151 of 168 files (761 cands) Read 152 of 168 files (767 cands) Read 153 of 168 files (771 cands) Read 154 of 168 files (775 cands) Read 155 of 168 files (779 cands) Read 156 of 168 files (785 cands) Read 157 of 168 files (792 cands) Read 158 of 168 files (796 cands) Read 159 of 168 files (802 cands) Read 160 of 168 files (806 cands) Read 161 of 168 files (810 cands) Read 162 of 168 files (814 cands) Read 163 of 168 files (819 cands) Read 164 of 168 files (823 cands) Read 165 of 168 files (827 cands) Read 166 of 168 files (832 cands) Read 167 of 168 files (835 cands) Read 168 of 168 files (837 cands)
+Done
+  Sorting the 837 candidates by frequency...
+  Searching for dupes...
+Found 55 candidates.
+
+Removed 42 candidates with DM problems.
+
+
+Searching for duplicate harmonics...
+Removed a total of 2 harmonics.
+
+
+
+================folding candidates==================
+
+
+11
+mpiexec -n 11 -cpus-per-proc 1 -num-cores 32 python ../fold_mpi.py 64 32 GBT_Lband_PSR.fil Sband
+ALL DONE
+
+real	0m11.292s
+user	1m35.656s
+sys	0m29.195s
